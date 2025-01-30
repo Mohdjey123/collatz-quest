@@ -15,32 +15,44 @@ const SYNC_INTERVAL = 5000;
 Chart.defaults.color = '#94a3b8';
 Chart.defaults.borderColor = '#334155';
 
+const GIST_ID = '641742d2b625cd291d3944792c21dfeb';
+const GIST_URL = `https://gist.githubusercontent.com/Mohdjey123/${GIST_ID}/raw/data.json`;
+
 async function loadInitialData() {
-   try {
-      const response = await fetch('data.json');
-      if (!response.ok) throw new Error('Failed to load data');
-      const data = await response.json();
+    try {
+        // Try loading from Gist first
+        const response = await fetch(GIST_URL + '?timestamp=' + Date.now());
+        if (!response.ok) throw new Error('Failed to load data');
+        const data = await response.json();
 
-      // Update current number to start from the last known number
-      currentNumber = Math.max(data.lastNumber,
-         parseInt(localStorage.getItem(STORAGE_KEYS.LAST_NUMBER)) || 1);
+        // Update current number to start from the last known number
+        currentNumber = Math.max(data.lastNumber,
+            parseInt(localStorage.getItem(STORAGE_KEYS.LAST_NUMBER)) || 1);
 
-      // Merge records from server with local records
-      const localRecords = JSON.parse(localStorage.getItem(STORAGE_KEYS.RECORDS) || '[]');
-      records = mergeAndSortRecords([...data.records, ...localRecords]);
+        // Merge records from server with local records
+        const localRecords = JSON.parse(localStorage.getItem(STORAGE_KEYS.RECORDS) || '[]');
+        records = mergeAndSortRecords([...data.records, ...localRecords]);
 
-      // Update UI
-      updateRecordsTable();
-      document.getElementById('globalCount').textContent = data.globalCount.toLocaleString();
+        // Update UI
+        updateRecordsTable();
+        document.getElementById('globalCount').textContent = data.globalCount.toLocaleString();
 
-      // Store the merged records locally
-      localStorage.setItem(STORAGE_KEYS.RECORDS, JSON.stringify(records));
-      localStorage.setItem(STORAGE_KEYS.LAST_NUMBER, currentNumber.toString());
-   } catch (error) {
-      console.error('Error loading initial data:', error);
-      // Fall back to local storage if remote data fails to load
-      loadFromLocalStorage();
-   }
+        // Store the merged records locally
+        localStorage.setItem(STORAGE_KEYS.RECORDS, JSON.stringify(records));
+        localStorage.setItem(STORAGE_KEYS.LAST_NUMBER, currentNumber.toString());
+    } catch (error) {
+        console.error('Error loading from Gist:', error);
+        // Fall back to local data.json if Gist fails
+        try {
+            const response = await fetch('data.json');
+            if (!response.ok) throw new Error('Failed to load local data');
+            const data = await response.json();
+            // ... rest of your existing code ...
+        } catch (fallbackError) {
+            console.error('Error loading local data:', fallbackError);
+            loadFromLocalStorage();
+        }
+    }
 }
 
 function loadFromLocalStorage() {
