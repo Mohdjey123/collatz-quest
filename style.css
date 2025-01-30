@@ -217,7 +217,7 @@ button:hover {
 
 @keyframes spin {
    to {
-       transform: rotate(360deg);
+      transform: rotate(360deg);
    }
 }
 
@@ -268,25 +268,25 @@ button:hover {
 /* Responsive design */
 @media (max-width: 768px) {
    .container {
-       padding: 1rem;
+      padding: 1rem;
    }
-   
+
    .input-group {
-       flex-direction: column;
+      flex-direction: column;
    }
-   
+
    h1 {
-       font-size: 2rem;
+      font-size: 2rem;
    }
-   
+
    .stats-grid {
-       grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
    }
-   
+
    .records-table {
-       display: block;
-       overflow-x: auto;
-       white-space: nowrap;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
    }
 }
 
@@ -336,4 +336,12 @@ input[type="checkbox"]:checked::before {
 
 ::-webkit-scrollbar-thumb:hover {
    background: var(--text-secondary);
+}
+
+.download-button {
+   background: #8b5cf6;
+}
+
+.download-button:hover {
+   background: #7c3aed;
 }

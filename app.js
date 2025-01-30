@@ -271,6 +271,7 @@ function toggleAutoCalc() {
       autoCalcInterval = setInterval(() => {
          calculateCollatz(currentNumber);
          currentNumber++;
+         localStorage.setItem(STORAGE_KEYS.LAST_NUMBER, currentNumber.toString());
       }, 2000);
    } else {
       statusIndicator.style.display = 'none';
@@ -279,10 +280,16 @@ function toggleAutoCalc() {
 }
 
 // Event listeners
+document.addEventListener('DOMContentLoaded', () => {
+   loadInitialData().then(() => {
+      toggleAutoCalc();
+   });
+
+   // Add download button event listener
+   document.getElementById('downloadData').addEventListener('click', downloadRecordsAsJson);
+});
+
 document.getElementById('autoCalc').addEventListener('change', toggleAutoCalc);
 document.getElementById('number').addEventListener('keypress', (e) => {
    if (e.key === 'Enter') calculateCollatz();
 });
-
-// Start auto-calculation on load
-toggleAutoCalc();

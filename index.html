@@ -1,74 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collatz Explorer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Collatz Explorer</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>Collatz Explorer</h1>
-            <p class="subtitle">Visualizing the journey from any number to 1</p>
-            <p class="global-stats">Numbers Explored Globally: <span id="globalCount">0</span></p>
-        </header>
+   <div class="container">
+      <header>
+         <h1>Collatz Explorer</h1>
+         <p class="subtitle">Visualizing the journey from any number to 1</p>
+         <p class="global-stats">Numbers Explored Globally: <span id="globalCount">0</span></p>
+      </header>
 
-        <div class="input-section">
-            <div class="input-group">
-                <input type="number" id="number" min="1" placeholder="Enter a starting number">
-                <button onclick="calculateCollatz()">Calculate</button>
-                <button onclick="shareDiscovery()" class="share-button">Share Discovery</button>
-            </div>
-            <div class="auto-calc">
-                <input type="checkbox" id="autoCalc" checked>
-                <label for="autoCalc">Auto-calculate interesting numbers</label>
-                <div id="autoCalcStatus" class="loading" style="display: none;"></div>
-            </div>
-        </div>
+      <div class="input-section">
+         <div class="input-group">
+            <input type="number" id="number" min="1" placeholder="Enter a starting number">
+            <button onclick="calculateCollatz()">Calculate</button>
+            <button onclick="shareDiscovery()" class="share-button">Share Discovery</button>
+         </div>
+         <div class="auto-calc">
+            <input type="checkbox" id="autoCalc" checked>
+            <label for="autoCalc">Auto-calculate interesting numbers</label>
+            <div id="autoCalcStatus" class="loading" style="display: none;"></div>
+         </div>
+      </div>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Steps to Reach 1</h3>
-                <p id="steps">-</p>
-            </div>
-            <div class="stat-card">
-                <h3>Highest Value</h3>
-                <p id="maxValue">-</p>
-            </div>
-            <div class="stat-card">
-                <h3>Your Numbers Explored</h3>
-                <p id="totalTested">0</p>
-            </div>
-        </div>
+      <div class="stats-grid">
+         <div class="stat-card">
+            <h3>Steps to Reach 1</h3>
+            <p id="steps">-</p>
+         </div>
+         <div class="stat-card">
+            <h3>Highest Value</h3>
+            <p id="maxValue">-</p>
+         </div>
+         <div class="stat-card">
+            <h3>Your Numbers Explored</h3>
+            <p id="totalTested">0</p>
+         </div>
+      </div>
 
-        <div class="visualization">
-            <div id="sequence"></div>
-            <div class="chart-container">
-                <canvas id="sequenceChart"></canvas>
-            </div>
-        </div>
+      <div class="visualization">
+         <div id="sequence"></div>
+         <div class="chart-container">
+            <canvas id="sequenceChart"></canvas>
+         </div>
+      </div>
 
-        <div class="visualization">
-            <h2>Record Holders</h2>
-            <table class="records-table">
-                <thead>
-                    <tr>
-                        <th>Starting Number</th>
-                        <th>Steps</th>
-                        <th>Peak Value</th>
-                        <th>Discovered By</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody id="recordsBody"></tbody>
-            </table>
-        </div>
-    </div>
+      <div class="visualization">
+         <h2>Record Holders</h2>
+         <table class="records-table">
+            <thead>
+               <tr>
+                  <th>Starting Number</th>
+                  <th>Steps</th>
+                  <th>Peak Value</th>
+                  <th>Discovered By</th>
+                  <th>Date</th>
+               </tr>
+            </thead>
+            <tbody id="recordsBody"></tbody>
+         </table>
+      </div>
+   </div>
 
-    <div id="toast" class="toast">Link copied to clipboard!</div>
+   <button id="downloadData" class="download-button">Download Records</button>
+   <div id="toast" class="toast">Link copied to clipboard!</div>
 
-    <script src="app.js"></script>
+   <script src="app.js"></script>
 </body>
+
 </html>
