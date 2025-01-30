@@ -261,6 +261,13 @@ function updateChart(sequence) {
    });
 }
 
+function updateGlobalCount() {
+   const currentCount = parseInt(localStorage.getItem(STORAGE_KEYS.GLOBAL_COUNT) || '0');
+   const newCount = currentCount + 1;
+   localStorage.setItem(STORAGE_KEYS.GLOBAL_COUNT, newCount.toString());
+   document.getElementById('globalCount').textContent = newCount.toLocaleString();
+}
+
 // Auto-calculation feature
 function toggleAutoCalc() {
    const autoCalcEnabled = document.getElementById('autoCalc').checked;
