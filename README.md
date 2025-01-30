@@ -1,7 +1,8 @@
 # Collatz Quest 🔢✨
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-blue?style=for-the-badge&logo=github)](https://mohdjey123.github.io/collatz-quest)
-[![Last Number Checked](https://img.shields.io/badge/dynamic/json?url=https://raw.githubusercontent.com/mohdjey123/collatz-quest/main/data.json&query=$.lastNumber&label=Last%20Number%20Checked&style=for-the-badge)](data.json)
+[![Last Number Checked](https://img.shields.io/badge/dynamic/json?url=https://gist.githubusercontent.com/Mohdjey123/641742d2b625cd291d3944792c21dfeb/raw/data.json&query=$.lastNumber&label=Last%20Number%20Checked&style=for-the-badge)](https://gist.github.com/Mohdjey123/641742d2b625cd291d3944792c21dfeb)
+[![Update Frequency](https://img.shields.io/badge/Updates%20Every-5%20Minutes-success?style=for-the-badge)](https://github.com/Mohdjey123/collatz-quest/actions)
 
 ## About The Project
 
@@ -19,7 +20,7 @@ The conjecture states that this sequence will eventually reach 1 for all positiv
 ## ✨ Features
 
 - 📊 Real-time visualization of Collatz sequences
-- 🌐 Collaborative exploration tracking global progress
+- 🌐 Collaborative exploration with 5-minute data sync
 - 📈 Interactive charts with logarithmic scaling
 - 🏆 Record tracking for longest sequences
 - 🔄 Auto-calculation mode
@@ -27,6 +28,7 @@ The conjecture states that this sequence will eventually reach 1 for all positiv
 - 📱 Fully responsive design
 - 💾 Progress persistence across sessions
 - 🔗 Shareable discoveries
+- ⚡ Near real-time global updates
 
 ## 🚀 Live Demo
 
@@ -39,9 +41,17 @@ Our community has explored numbers up to `[dynamic-last-number]`. The current re
 ## 🛠️ Setup
 
 1. Fork this repository
-2. Enable GitHub Pages in your repository settings
-3. Update the GitHub Action secret `DOWNLOAD_URL` to point to your data.json file
-4. Your instance will be live at `https://mohdjey123.github.io/collatz-quest`
+2. Create a public GitHub Gist:
+   - Create a new Gist with your data.json content
+   - Copy the Gist ID from the URL
+3. Set up GitHub Actions:
+   - Generate a Personal Access Token with `gist` scope
+   - Add secrets to your repository:
+     - `GIST_TOKEN`: Your personal access token
+     - `GIST_ID`: Your Gist ID
+4. Enable GitHub Pages in your repository settings
+5. Update the Gist ID in app.js and README badges
+6. Your instance will be live at `https://[your-username].github.io/collatz-quest`
 
 ## 🤝 Contributing
 
@@ -55,7 +65,6 @@ Join our quest to explore the Collatz Conjecture! Here's how you can contribute:
 ### Development
 
 To run locally:
-
 ```bash
 # Clone the repository
 git clone https://github.com/mohdjey123/collatz-quest.git
@@ -64,18 +73,33 @@ git clone https://github.com/mohdjey123/collatz-quest.git
 cd collatz-quest
 
 # Serve with any static file server
+# Example using Python
+python -m http.server 8000
+
+# Example using Node.js
+npx serve
 ```
 
 ## 📊 Data Storage
 
-- Local progress is saved in browser storage
-- Global records are maintained in `data.json`
-- Data is automatically updated every 6 hours
-- Manual updates can be triggered through the GitHub Action
+- Local progress saved in browser storage
+- Global records maintained in GitHub Gist
+- Data automatically updated every 1 minutes
+- Fallback to local storage if Gist is unavailable
+- Real-time synchronization between all users
+- Manual updates can be triggered through GitHub Actions
 
 ## 🔬 Scientific Interest
 
 While this project doesn't aim to prove the conjecture, it provides an interactive way to explore its patterns and potentially discover interesting sequences. All numbers up to 2^68 have been verified to reach 1, but the conjecture remains unproven for all positive integers.
+
+## 🔄 Synchronization
+
+The project uses a combination of:
+- GitHub Gist for near real-time global state
+- Local storage for immediate updates
+- 5-minute sync intervals for all users
+- Automatic fallback mechanisms for reliability
 
 ## 📜 License
 
@@ -84,9 +108,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## 🙏 Acknowledgments
 
 - Chart.js for visualization
-- The mathematical community for ongoing research into the Collatz Conjecture
+- GitHub Gist for real-time data storage
+- GitHub Actions for automated updates
+- The mathematical community for ongoing research
 - All contributors to this exploration
 
 ---
-
-<p align="center">Made with ❤️ by the mathematics community</p>
