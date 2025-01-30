@@ -3,25 +3,18 @@ name: Update Collatz Data
 on:
   workflow_dispatch:  # Manual trigger
   schedule:
-    - cron: '0 */6 * * *'  # Run every 6 hours
+    - cron: '*/5 * * * *'  # Runs every 5 minutes
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      
-      - name: Download current data
-        run: |
-          curl -o downloaded_data.json ${{ secrets.DOWNLOAD_URL }}
-          
-      - name: Update data file
-        run: |
-          if [ -f "downloaded_data.json" ]; then
-            cp downloaded_data.json data.json
-            git config --global user.name 'GitHub Action'
-            git config --global user.email 'action@github.com'
-            git add data.json
-            git commit -m "Update Collatz data [skip ci]"
-            git push
-          fi
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Update Gist
+        uses: exuanbo/actions-deploy-gist@v1
+        with:
+          token: ${{ secrets.GIST_TOKEN }}
+          gist_id: ${{ secrets.GIST_ID }}
+          file_path: data.json
