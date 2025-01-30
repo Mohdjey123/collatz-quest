@@ -2,7 +2,7 @@
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Demo-blue?style=for-the-badge&logo=github)](https://mohdjey123.github.io/collatz-quest)
 [![Last Number Checked](https://img.shields.io/badge/dynamic/json?url=https://gist.githubusercontent.com/Mohdjey123/641742d2b625cd291d3944792c21dfeb/raw/data.json&query=$.lastNumber&label=Last%20Number%20Checked&style=for-the-badge)](https://gist.github.com/Mohdjey123/641742d2b625cd291d3944792c21dfeb)
-[![Update Frequency](https://img.shields.io/badge/Updates%20Every-5%20Minutes-success?style=for-the-badge)](https://github.com/Mohdjey123/collatz-quest/actions)
+[![Update Frequency](https://img.shields.io/badge/Updates%20Every-1%20Minute-success?style=for-the-badge)](https://github.com/Mohdjey123/collatz-quest/actions)
 
 ## About The Project
 
@@ -20,7 +20,7 @@ The conjecture states that this sequence will eventually reach 1 for all positiv
 ## ✨ Features
 
 - 📊 Real-time visualization of Collatz sequences
-- 🌐 Collaborative exploration with 5-minute data sync
+- 🌐 Collaborative exploration with 1-minute data sync
 - 📈 Interactive charts with logarithmic scaling
 - 🏆 Record tracking for longest sequences
 - 🔄 Auto-calculation mode
